@@ -22,16 +22,68 @@ driver.get('https://www.ikea.com/pl/pl/')
 
 driver.maximize_window()
 
-logger.info("Trying to click on favourites")
+time.sleep(2)
+
 
 try:
-    heart_xpath = "/html/body/header/div/ul/li[3]/a/span"
-    element = driver.find_element(By.XPATH, heart_xpath)
-    logger.info(f"CLICKING HEART")
+    meble_xpath = "/html/body/div[4]/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/a/div"
+    element = driver.find_element(By.XPATH, meble_xpath)
+    logger.info(f"CLICKING MEBLE")
     element.click()
 except:
-    logger.error("HEART NOT OK")
+    logger.error("'MEBLE' NOT OK")
 
-time.sleep(5)
+try:
+    sofa_xpath = "/html/body/div[4]/div/div[2]/div/div[2]/div/div/div/ul[2]/li[1]/a"
+    element = driver.find_element(By.XPATH, sofa_xpath)
+    logger.info(f"CLICKING 'sofy i narozniki''")
+    element.click()
+except:
+    logger.error("choosing 'sofy i narozniki' NOT OK")
+
+time.sleep(1)
+
+logger.info("Clicking on product")
+
+try:
+    product_xpath = "/html/body/main/div[5]/div[1]/div[2]/section/div[2]/div[1]/div/div[3]/a/div[1]/div[1]/h3/span[1]/span"
+    element = driver.find_element(By.XPATH, product_xpath)
+    logger.info(f"Product clicked")
+    element.click()
+except:
+    logger.error("cannot show product")
+
+time.sleep(1)
+
+logger.info("Adding to cart")
+
+try:
+    adding_xpath = "/html/body/main/div/div[1]/div/div[2]/div[2]/div[2]/div[6]/div/div/div/button/span/span"
+    element = driver.find_element(By.XPATH, adding_xpath)
+    logger.info(f"Added to cart'")
+    element.click()
+except:
+    logger.error("cannot add to cart")
+
+time.sleep(1)
+
+logger.info("Going to cart")
+
+try:
+    heart_xpath = "/html/body/div[15]/div/div[3]/div/div[3]/button[2]/span"
+    element = driver.find_element(By.XPATH, heart_xpath)
+    logger.info(f"CLICKING CART")
+    element.click()
+except:
+    logger.error("CART NOT OK")
+
+time.sleep(1)
+
+try:
+    cost_xpath = "/html/body/main/main/div/div/div[31]/div/div[1]/div/div[2]/span/span[1]/span[1]/span[2]"
+    temp = driver.find_element(By.CLASS_NAME, "cart-ingka-price__integer")
+    logger.info("KOSZT: %s", temp.text)
+except:
+    logger.error("Unable to get cost")
 
 driver.close()
