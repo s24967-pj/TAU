@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-logging.basicConfig(filename='./TauBurgerTestChrome.log', filemode='w', level=logging.DEBUG)
+logging.basicConfig(filename='./TauBurgerTestEdge.log', filemode='w', level=logging.DEBUG)
 logger = logging.getLogger('Selenium TAU Lab2 - pyszne')
 logger.setLevel(logging.INFO)
 ch = logging.StreamHandler()
@@ -13,8 +13,10 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 ch.setFormatter(formatter)
 logger.addHandler(ch)
 
+options = webdriver.EdgeOptions()
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
+driver = webdriver.Edge(options=options)
 
-driver = webdriver.Chrome()
 logger.info("Opening Burger King homepage")
 driver.get('https://burgerking.pl/pl/')
 
@@ -79,4 +81,4 @@ except Exception as e:
 time.sleep(2)
 
 driver.close()
-
+driver.quit()
