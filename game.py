@@ -6,9 +6,8 @@ class Game():
     def __init__(self, board: Board, player: Player):
         self.board = board
         self.player = player
-
-        self.board.update_board(board.start)
-        self.board.display()
+     
+        self.display_map()
 
     def _is_game_finished(self):
         return self.player.position == self.board.finish
@@ -20,6 +19,9 @@ class Game():
         if 0 <= new_x < len(self.board.map) and 0 <= new_y < len(self.board.map[0]):
             return self.board.map[new_x][new_y] != "X"
         return False
+    
+    def display_map(self):
+        self.board.display(self.board.update_map(self.player.position))
 
     def start_game(self):
         while not self._is_game_finished():
@@ -32,8 +34,7 @@ class Game():
             else:
                 print("Niepoprawny ruch, spróbuj ponownie.")
 
-            self.board.update_board(self.player.position)
-            self.board.display()
+            self.display_map()
         
         print("Gratulacje! Dotarłeś do celu!")
 

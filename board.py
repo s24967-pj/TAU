@@ -6,10 +6,10 @@ class Board():
     def __init__(self, size: int = 5):
         init(autoreset=True)
         self.size = size
-        self.map, self.start, self.finish = self._generate()
+        self.map, self.start, self.finish = self._generate_map()
         self._generate_obstacles()
         
-    def _generate(self):
+    def _generate_map(self):
         map = [[" " for _ in range(self.size)] for _ in range(self.size)]
         start = (self.size - 1, random.randint(0, self.size - 1))
         finish = (0, random.randint(0, self.size -1))
@@ -27,12 +27,13 @@ class Board():
             if self.map[x][y] == " ":
                 self.map[x][y] = "X"
     
-    def display(self):
-        for row in self.map:
+    @staticmethod
+    def display(map):
+        for row in map:
             print(" ".join(row))
 
-    def update_board(self, player_position):
-        updated_map = []       
+    def update_map(self, player_position):
+        updated_map = []
         for i, row in enumerate(self.map):
             new_row = []
             for j, cell in enumerate(row):
@@ -44,4 +45,4 @@ class Board():
                     new_row.append(cell)
             updated_map.append(new_row)
         
-        self.map = updated_map
+        return updated_map
