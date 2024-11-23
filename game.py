@@ -40,7 +40,7 @@ class Game():
 
 
 if __name__ == "__main__":
-    board = Board()
+    board = Board(size=5)
     player = Player(board.start)
     game = Game(board, player)
 

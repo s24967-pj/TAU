@@ -13,8 +13,6 @@ class Board():
         map = [[" " for _ in range(self.size)] for _ in range(self.size)]
         start = (self.size - 1, random.randint(0, self.size - 1))
         finish = (0, random.randint(0, self.size -1))
-        print(f"START {start}")
-        print(f"FINISH {finish}")
 
         map[start[0]][start[1]] = "A"
         map[finish[0]][finish[1]] = "B"
