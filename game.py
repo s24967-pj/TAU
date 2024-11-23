@@ -13,6 +13,9 @@ class Game():
         return self.player.position == self.board.finish
     
     def is_move_correct(self, player_move):
+        if player_move == 0:
+            return False
+        
         new_x = self.player.position[0] + player_move[0]
         new_y = self.player.position[1] + player_move[1]
 

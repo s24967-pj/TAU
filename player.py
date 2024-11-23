@@ -15,7 +15,7 @@ class Player():
         if move_input in self.MOVES:
             return self.MOVES[move_input]
         else:
-            print("Nie możesz się tam ruszyć!")
+            print("Błędny przycisk ruchu!")
             return 0
         
     def move(self, direction):
