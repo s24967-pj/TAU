@@ -1,9 +1,4 @@
 import unittest
-import sys
-import os
-
-# Dodaj główny katalog do ścieżki systemowej (sys.path). Dzięki temu znajduje prawidłowo moduł "board"
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from board import Board
 from colorama import Fore, Style
@@ -13,10 +8,6 @@ class BoardTests(unittest.TestCase):
     def setUp(self):
         """Przygotowanie instancji klasy Board do testów."""
         self.board = Board(size=5)
-    
-    def test_smoke(self):
-        self.assertTrue(True, "Smoke test zakończony niepowodzeniem!")
-        print("[PASS] Smoke test zakończony pomyślnie.")
 
     def test_map_initialization(self):
         """Test, czy plansza jest prawidłowo zainicjowana."""
