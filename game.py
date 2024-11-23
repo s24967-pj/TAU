@@ -6,8 +6,6 @@ class Game():
     def __init__(self, board: Board, player: Player):
         self.board = board
         self.player = player
-     
-        self.display_map()
 
     def _is_game_finished(self):
         return self.player.position == self.board.finish
@@ -27,6 +25,8 @@ class Game():
         self.board.display(self.board.update_map(self.player.position))
 
     def start_game(self):
+        self.display_map()
+        
         while not self._is_game_finished():
 
             player_move = self.player.get_move()
