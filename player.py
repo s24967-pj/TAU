@@ -19,6 +19,4 @@ class Player():
             return 0
         
     def move(self, direction):
-        print(f"PLAYER POS BEFORE: {self.position}")
         self.position = self.position[0] + direction[0], self.position[1] + direction[1]
-        print(f"PLAYER POS AFTER: {self.position}")
