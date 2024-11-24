@@ -2,14 +2,23 @@ import random
 from colorama import Fore, Style, init
 
 class Board():
+    """
+    Klasa reprezentująca planszę w grze.
+    """
 
     def __init__(self, size: int = 5):
+        """
+        Inicjalizuje planszę o podanym rozmiarze (domyślnie 5x5).
+        """
         init(autoreset=True)
         self.size = size
         self.map, self.start, self.finish = self._generate_map()
         self._generate_obstacles()
         
     def _generate_map(self):
+        """
+        Tworzy mapę o zadanym rozmiarze, ustawia pozycję startową i końcową.
+        """
         map = [[" " for _ in range(self.size)] for _ in range(self.size)]
         start = (self.size - 1, random.randint(0, self.size - 1))
         finish = (0, random.randint(0, self.size -1))
@@ -20,6 +29,9 @@ class Board():
         return map, start, finish
     
     def _generate_obstacles(self):
+        """
+        Dodaje losowe przeszkody (X) na mapie.
+        """
         for _ in range(self.size):
             x, y = random.randint(0, self.size - 1), random.randint(0, self.size -1)
             if self.map[x][y] == " ":
@@ -27,10 +39,16 @@ class Board():
     
     @staticmethod
     def display(map):
+        """
+        Wyświetla mapę w konsoli.
+        """
         for row in map:
             print(" ".join(row))
 
     def update_map(self, player_position):
+        """
+        Aktualizuje mapę, uwzględniając pozycję gracza i przeszkody.
+        """
         updated_map = []
         for i, row in enumerate(self.map):
             new_row = []
