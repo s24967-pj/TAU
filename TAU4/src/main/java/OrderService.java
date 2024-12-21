@@ -17,7 +17,6 @@ public class OrderService {
             notificationService.sendNotification("Zamówienie na " + product + " odrzucone - brak wystarczających zapasów.");
             return "Zamówienie odrzucone - brak zapasów";
         }
-
         if (!paymentService.processPayment(amount)) {
             notificationService.sendNotification("Zamówienie na " + product + " nie powiodło się - problem z płatnością.");
             return "Zamówienie odrzucone - problem z płatnością";
