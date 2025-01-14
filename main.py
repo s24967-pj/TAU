@@ -19,17 +19,26 @@ users_database = [
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return { "/users; /users/{id}"
+            }
 
-# Endpoint GET /users - Zwraca listę użytkowników
+# Zwraca listę użytkowników
 @app.get("/users", response_model=List[User])
 def get_users():
     return users_database
 
-# Endpoint GET /users/{id} - Zwraca szczegóły użytkownika
+# Zwraca szczegóły po id użytkownika
 @app.get("/users/{id}", response_model=User)
 def get_user(id: int):
     for user in users_database:
         if user.id == id:
             return user
     raise HTTPException(status_code=404, detail="User not found")
+
+# Pozwala na dodanie nowego użytkownika
+@app.post("/users", response_model=User, status_code=201)
+def create_user(user: User):
+    if any(u.id == user.id for u in users_database):
+        raise HTTPException(status_code=400, detail="User ID already exists")
+    users_database.append(user)
+    return user
