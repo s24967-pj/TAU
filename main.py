@@ -1,4 +1,4 @@
-from typing import Union, List
+from typing import List
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
@@ -42,3 +42,21 @@ def create_user(user: User):
         raise HTTPException(status_code=400, detail="User ID already exists")
     users_database.append(user)
     return user
+
+# Umozliwia zmiane danych użytkownika wg podanego ID
+@app.put("/users/{id}", response_model=User)
+def update_user(id: int, updated_user: User):
+    for index, user in enumerate(users_database):
+        if user.id == id:
+            users_database[index] = updated_user
+            return updated_user
+    raise HTTPException(status_code=404, detail="User not found")
+
+# Usuwa użytkownika po ID
+@app.delete("/users/{id}", status_code=204)
+def delete_user(id: int):
+    for index, user in enumerate(users_database):
+        if user.id == id:
+            users_database.pop(index)
+            return
+    raise HTTPException(status_code=404, detail="User not found")
